@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" data-provider-thread-count="1">
+  <listeners>
+    <listener class-name="General.Managers.WebDriverManager">
+      <parameter name="executionMode" value="local" />
+      <parameter name="browser" value= "chrome" />
+      <parameter name="gridHubIP" value="" />
+      <parameter name="gridDriverPath" value=""/>
+      <parameter name="localDriverPath" value="src/main/resources/Drivers/"/>
+      <parameter name="platform" value="mac" />
+      <parameter name="staticTimeout" value="0" />
+      <parameter name="dynamicTimeout" value="30" />
+      <parameter name="geckoDriver" value=""/>
+      <parameter name="baseURL" value="https://www.google.com/"/>
+    </listener>
+  </listeners>
+
+  <test name="test">
+    <classes>
+      <class name="UI.Tests.SampleTest"/>
+    </classes>
+  </test>
+</suite>
