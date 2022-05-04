@@ -1,5 +1,6 @@
 package General.Managers;
 
+import General.Logs.Log;
 import General.Utils.JsonManager;
 import General.Utils.OSValidator;
 import General.Utils.Web.BasePage;
@@ -38,6 +39,10 @@ public class WebDriverManager extends TestManager implements IAnnotationTransfor
 
   public static String getExecMode() {
     return executionMode;
+  }
+
+  public static ThreadLocal<WebDriver> getThreadDriver() {
+    return threadDriver;
   }
 
   private void createDriver() {
@@ -102,6 +107,7 @@ public class WebDriverManager extends TestManager implements IAnnotationTransfor
 
   @BeforeMethod
   protected final void setupWebDriver() {
+    Log.info("Tests is starting!");
     createDriver();
     thread.set(false);
     threadDriver.get().manage().deleteAllCookies();
@@ -112,6 +118,7 @@ public class WebDriverManager extends TestManager implements IAnnotationTransfor
   @AfterMethod
   protected final void closeWebDriver(ITestResult result) {
     deleteDriver();
+    Log.info("Tests are ending!");
   }
 
   @Override
