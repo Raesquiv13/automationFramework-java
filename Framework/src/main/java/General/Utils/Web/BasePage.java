@@ -11,8 +11,6 @@ import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-
 import java.io.File;
 import java.nio.CharBuffer;
 import java.util.List;
@@ -24,20 +22,17 @@ public abstract class BasePage {
   private int timeOut, staticTimeout;
   private WebDriverWait wait;
 
-  public static BasePage timerNotify;
 
   // --------------------------------------------------------- Constructor
   // ------------------------------------------------------------
   public BasePage(WebDriver driver) {
     this.driver = driver;
-    //timeOut = ExecutionManager.returnTimeOut();
     timeOut = WebDriverManager.getDynamic();
     staticTimeout = WebDriverManager.getStatic();
     wait = new WebDriverWait(driver, timeOut);
   }
 
   public abstract boolean verifyLoads();
-
   // Locators
 
   /**
