@@ -1,8 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite">
+<suite name="API-Suite">
+  <listeners>
+    <listener class-name="General.Listeners.TestListener"/>
+    <listener class-name="General.Listeners.AnnotationTransformer"/>
+  </listeners>
 
-  <parameter name="baseUrl" value="bookstore.toolsqa.com" />
+  <parameter name="baseUrl" value="bookstore.toolsqa.com"/>
 
   <test name="sampleTest">
     <classes>

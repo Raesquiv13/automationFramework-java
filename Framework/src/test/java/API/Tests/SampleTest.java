@@ -11,6 +11,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
+
+import static General.Utils.ExtentReports.ExtentTestManager.startTest;
+
 /*
  * This is a website that we can use for testing purpose.
  * https://bookstore.toolsqa.com/swagger/
@@ -37,7 +41,8 @@ public class SampleTest extends TestManager {
   }
 
   @Test
-  public void firstApiTest() {
+  public void firstApiTest(Method method) {
+    startTest(method.getName(), "This is the first test we will use as sample");
     response = baseApi.getResponse("/BookStore/v1/Books", "get", null, null);
     int statusCode = response.getStatusCode();
     assertTrue(statusCode == 200, "There is an issue with the API response, status code:" + statusCode);

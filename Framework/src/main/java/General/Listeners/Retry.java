@@ -11,8 +11,9 @@ import org.testng.ITestResult;
 import static General.Utils.ExtentReports.ExtentTestManager.getTest;
 
 public class Retry extends WebDriverManager implements IRetryAnalyzer {
-  private        int count  = 0;
+  private int count = 0;
   private static int maxTry = 1; //Run the failed test 2 times
+
   @Override
   public boolean retry(ITestResult iTestResult) {
     if (!iTestResult.isSuccess()) {                     //Check if test not succeed
@@ -27,15 +28,18 @@ public class Retry extends WebDriverManager implements IRetryAnalyzer {
     }
     return false;
   }
+
   public void extendReportsFailOperations(ITestResult iTestResult) {
-   /*
-    * Object testClass = iTestResult.getInstance();
-    * Not sure what i need to use instead of BaseTest
-    * WebDriver webDriver = ((BaseTest) testClass).getDriver();
-    */
-    WebDriver webDriver = this.getThreadDriver().get();
-    String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BASE64);
-    getTest().log(Status.FAIL, "Test Failed",
-      getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+    if (this.getThreadDriver() != null) {
+      /*
+       * Object testClass = iTestResult.getInstance();
+       * Not sure what i need to use instead of BaseTest
+       * WebDriver webDriver = ((BaseTest) testClass).getDriver();
+       */
+      WebDriver webDriver = this.getThreadDriver().get();
+      String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BASE64);
+      getTest().log(Status.FAIL, "Test Failed",
+        getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+    }
   }
 }

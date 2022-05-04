@@ -16,6 +16,16 @@ import java.util.Objects;
 import static General.Utils.ExtentReports.ExtentTestManager.getTest;
 
 public class TestListener extends WebDriverManager implements ITestListener {
+  private static String testType;
+
+  public static String getTestType() {
+    return testType;
+  }
+
+  public void setTestType(String testType) {
+    this.testType = testType;
+  }
+
   private static String getTestMethodName(ITestResult iTestResult) {
     return iTestResult.getMethod().getConstructorOrMethod().getName();
   }
@@ -23,8 +33,17 @@ public class TestListener extends WebDriverManager implements ITestListener {
   @Override
   public void onStart(ITestContext iTestContext) {
     Log.info("I am in onStart method " + iTestContext.getName());
-    iTestContext.setAttribute("WebDriver", this.getThreadDriver().get()
-    );
+    String testType = iTestContext.getSuite().getAllMethods().get(0).getTestClass().getName();
+    if (testType.contains("API.Tests")) {
+      setTestType("API");
+    } else if (testType.contains("UI.Tests")) {
+      setTestType("UI");
+    } else {
+      setTestType("General");
+    }
+    if (this.getThreadDriver() != null) {
+      iTestContext.setAttribute("WebDriver", this.getThreadDriver().get());
+    }
   }
 
   @Override
@@ -49,19 +68,21 @@ public class TestListener extends WebDriverManager implements ITestListener {
   @Override
   public void onTestFailure(ITestResult iTestResult) {
     Log.info(getTestMethodName(iTestResult) + " test is failed.");
-    //Get driver from BaseTest and assign to local webdriver variable.
-    /*
-     * Object testClass = iTestResult.getInstance();
-     * Not sure what i need to use instead of BaseTest
-     * WebDriver driver = ((BaseTest) testClass).getDriver();
-     */
-    WebDriver driver = this.getThreadDriver().get();
-    //Take base64Screenshot screenshot for extent reports
-    String base64Screenshot =
-      "data:image/png;base64," + ((TakesScreenshot) Objects.requireNonNull(driver)).getScreenshotAs(OutputType.BASE64);
-    //ExtentReports log and screenshot operations for failed tests.
-    getTest().log(Status.FAIL, "Test Failed",
-      getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+    if (this.getThreadDriver() != null) {
+      //Get driver from BaseTest and assign to local webdriver variable.
+      /*
+       * Object testClass = iTestResult.getInstance();
+       * Not sure what i need to use instead of BaseTest
+       * WebDriver driver = ((BaseTest) testClass).getDriver();
+       */
+      WebDriver driver = this.getThreadDriver().get();
+      //Take base64Screenshot screenshot for extent reports
+      String base64Screenshot =
+        "data:image/png;base64," + ((TakesScreenshot) Objects.requireNonNull(driver)).getScreenshotAs(OutputType.BASE64);
+      //ExtentReports log and screenshot operations for failed tests.
+      getTest().log(Status.FAIL, "Test Failed",
+        getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+    }
   }
 
   @Override

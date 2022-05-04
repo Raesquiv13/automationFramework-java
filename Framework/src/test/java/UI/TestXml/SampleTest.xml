@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite" data-provider-thread-count="1">
+<suite name="UI-Suite" data-provider-thread-count="1">
   <listeners>
     <listener class-name="General.Listeners.TestListener"/>
     <listener class-name="General.Listeners.AnnotationTransformer"/>
