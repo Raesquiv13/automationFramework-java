@@ -23,8 +23,6 @@ public abstract class BasePage {
   private WebDriverWait wait;
 
 
-  // --------------------------------------------------------- Constructor
-  // ------------------------------------------------------------
   public BasePage(WebDriver driver) {
     this.driver = driver;
     timeOut = WebDriverManager.getDynamic();
@@ -32,8 +30,7 @@ public abstract class BasePage {
     wait = new WebDriverWait(driver, timeOut);
   }
 
-  public abstract boolean verifyLoads();
-  // Locators
+  public abstract boolean verifyPageLoads();
 
   /**
    * Returns a WebElement based on a defined key or Null if there's an issue
@@ -133,7 +130,6 @@ public abstract class BasePage {
     }
   }
 
-  // Conditions
 
   /**
    * Determines whether the WebDriver is null
@@ -490,18 +486,6 @@ public abstract class BasePage {
     }
   }
 
-  // --------------------------------------------------------- Methods
-  // ----------------------------------------------------------------
-
-  /**
-   * Returns the current instance of the Selenium WebDriver
-   */
-  protected WebDriver getWebDriver() {
-    // TODO Research how to block this method
-    return driver;
-  }
-
-  // *******************//AVANTICA WEBDRIVER METHODS//**********************//
 
   /**
    * Closes a browser alert by accepting it

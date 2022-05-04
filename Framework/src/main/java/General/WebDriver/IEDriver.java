@@ -67,7 +67,7 @@ class IEDriver
 		catch (Exception e)
 		{
 			ExceptionManager.handleExeption(e, "[ERROR] There was a problem setting up the WebDriver");
-			//Reporter.log("[ERROR] There was a problem setting up the Avantica WebDriver");
+			//Reporter.log("[ERROR] There was a problem setting up the  WebDriver");
 		}
 	}
 

@@ -32,7 +32,7 @@ public class SamplePage extends BasePage {
   }
 
   @Override
-  public boolean verifyLoads() {
+  public boolean verifyPageLoads() {
     return waitForElementVisible(googleImg)
       && waitForElementVisible(searchInput);
   }

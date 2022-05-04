@@ -45,8 +45,8 @@ class ChromeDriver
         catch (Exception e)
         {
             ExceptionManager
-                    .handleExeption(e, "[ERROR] There was a problem setting up the Avantica WebDriver for Crossbrowsertesting");
-            //Reporter.log("[ERROR] There was a problem setting up the Avantica WebDriver Grid hub");
+                    .handleExeption(e, "[ERROR] There was a problem setting up the  WebDriver for Crossbrowsertesting");
+            //Reporter.log("[ERROR] There was a problem setting up the  WebDriver Grid hub");
             // TODO I believe it would be better to sent the exception here to have a better idea of what is going on
         }
     }
@@ -85,7 +85,7 @@ class ChromeDriver
 		}
 		catch (Exception e)
 		{
-			ExceptionManager.handleExeption(e, "[ERROR] There was a problem setting up the Avantica WebDriver");
+			ExceptionManager.handleExeption(e, "[ERROR] There was a problem setting up the  WebDriver");
 		}
 	}
 

@@ -10,7 +10,7 @@ public class SampleTest extends WebDriverManager
   @Test
   public void firstTest(){
     SamplePage google = new SamplePage(getDriver());
-    assertTrue(google.verifyLoads(),"There is an issue loading google page");
+    assertTrue(google.verifyPageLoads(),"There is an issue loading google page");
     assertAll();
   }
 }
