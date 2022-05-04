@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite">
+
+  <parameter name="baseUrl" value="bookstore.toolsqa.com" />
+
+  <test name="sampleTest">
+    <classes>
+      <class name="API.Tests.SampleTest"/>
+    </classes>
+  </test>
+</suite>
