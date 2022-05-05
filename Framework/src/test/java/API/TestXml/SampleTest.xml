@@ -3,9 +3,10 @@
 <suite name="API-Suite">
   <listeners>
     <listener class-name="General.Listeners.TestListener"/>
-    <listener class-name="General.Listeners.AnnotationTransformer"/>
   </listeners>
 
+  <!--The parameter enableReport is required to generate the extend-report-->
+  <parameter name="enableReport" value="true"/>
   <parameter name="baseUrl" value="bookstore.toolsqa.com"/>
 
   <test name="sampleTest">

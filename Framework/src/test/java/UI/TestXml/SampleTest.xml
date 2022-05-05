@@ -3,7 +3,6 @@
 <suite name="UI-Suite" data-provider-thread-count="1">
   <listeners>
     <listener class-name="General.Listeners.TestListener"/>
-    <listener class-name="General.Listeners.AnnotationTransformer"/>
     <listener class-name="General.Managers.WebDriverManager">
       <parameter name="executionMode" value="local"/>
       <parameter name="browser" value="chrome"/>
@@ -17,6 +16,9 @@
       <parameter name="baseURL" value="https://www.google.com"/>
     </listener>
   </listeners>
+
+  <!--The parameter enableReport is required to generate the extend-report-->
+  <parameter name="enableReport" value="true"/>
 
   <test name="test">
     <classes>

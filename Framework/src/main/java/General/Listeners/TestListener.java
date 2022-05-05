@@ -17,6 +17,7 @@ import static General.Utils.ExtentReports.ExtentTestManager.getTest;
 
 public class TestListener extends WebDriverManager implements ITestListener {
   private static String testType;
+  private static boolean reportEnabled;
 
   public static String getTestType() {
     return testType;
@@ -26,6 +27,14 @@ public class TestListener extends WebDriverManager implements ITestListener {
     this.testType = testType;
   }
 
+  public static boolean isReportEnabled() {
+    return reportEnabled;
+  }
+
+  public void setReportEnabled(boolean reportEnabled) {
+    this.reportEnabled = reportEnabled;
+  }
+
   private static String getTestMethodName(ITestResult iTestResult) {
     return iTestResult.getMethod().getConstructorOrMethod().getName();
   }
@@ -33,6 +42,23 @@ public class TestListener extends WebDriverManager implements ITestListener {
   @Override
   public void onStart(ITestContext iTestContext) {
     Log.info("I am in onStart method " + iTestContext.getName());
+    //Verify if report creation is enabled.
+    String enableReportParam = iTestContext.getCurrentXmlTest().getSuite().getParameter("enableReport");
+    boolean isReportEnabled;
+    if (enableReportParam != null) {
+      isReportEnabled = enableReportParam.equalsIgnoreCase("true") ? true : false;
+    } else {
+      System.out.println();
+      System.out.println();
+      System.err.println("[WARNING] >> The parameter enableReport is not set in the test configuration xml file");
+      System.out.println();
+      System.out.println();
+      isReportEnabled = false;
+    }
+    setReportEnabled(isReportEnabled);
+
+
+    //Set the type of test
     String testType = iTestContext.getSuite().getAllMethods().get(0).getTestClass().getName();
     if (testType.contains("API.Tests")) {
       setTestType("API");
